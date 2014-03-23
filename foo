@@ -1,0 +1,28 @@
+#! /usr/bin/python
+
+import feedparser
+
+class Grabber(object):
+	def ___init__(self):
+		d = feedparser.parse('http://krugman.blogs.nytimes.com/feed')
+		for post in d.entries:
+			lk = post.link 
+			ttl = post.title 
+			ttl = ttl.encode('ascii','ignore')
+			for i in range(len(ttl)):
+				if ttl[i] ==  "\'":
+					tit  = list(ttl)
+                       			tit[i] = '' 
+					"".join(tit)
+					ttl = tit	
+				elif ttl[i] ==  "\"":
+                       			tit  = list(ttl)
+                       			tit[i] = '' 
+                       			"".join(tit)
+                       			ttl = tit
+
+		y = open(ttl+".txt","w")
+		y.write(lk)
+
+
+Grabber
